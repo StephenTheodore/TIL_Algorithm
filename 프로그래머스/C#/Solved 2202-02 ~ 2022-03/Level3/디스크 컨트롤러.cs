@@ -65,7 +65,7 @@ public class Solution {
             if (tasksAvailable.Count() == 0)
             {
                 currentTask = tasksReq.ElementAt(0);
-                times[2] += tasksReq.ElementAt(0).req - times[0];
+                times[2] += currentTask.req - times[0];
                 currentTask.UpdateTimes(times,true);
             }
             else
