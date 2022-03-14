@@ -13,8 +13,8 @@
 > 		Info = clsBaseDatas.Info3;
 > 		break;
 > }
-> FTP.Upload(Info);
 > PLC.SendAck(true);
+> FTP.Upload(Info);
 > ```   
 
 # 
@@ -34,9 +34,10 @@
 > 			Info[i] = clsBaseDatas.Info3[i];
 > 			break;
 > 	}
-> 	FTP.Upload(Info[i]);
 > }
-> PLC.SendAck(true);	//이 인터페이스 비트에 정신이 팔렸었다.
+> PLC.SendAck(true);
+> for(int i = 0; i < 4; i++)
+> 	FTP.Upload(Info[i]);
 > ```
 > 빈 정보가 업로드되는 상황이 발생했고   
 > 로그 상으로 확인하니 분명 정보가 존재 했었지만 사라지는 현상이었다.     
