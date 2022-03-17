@@ -1,3 +1,6 @@
+//이 문제에서는 QuickSort를 적용할 수 없다.
+//특정 조건에서 O(n^2)의 복잡도를 가지기 때문
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -30,8 +33,9 @@ namespace _2751
         }
         static int Partition(List<int> list, int start, int end)
         {
-            int pivot = list[start];
+            int pivot = list[start + (end - start) / 2];
 
+            Swap(list, start, start + (end - start) / 2);
             while (start <= end)
             {
                 while (list[end] > pivot)
