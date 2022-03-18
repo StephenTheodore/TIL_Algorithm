@@ -1,7 +1,7 @@
 using System;
 using System.IO;
-using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _2792
 {
@@ -10,40 +10,28 @@ namespace _2792
         static void Main(string[] args)
         {
             StreamReader sr = new StreamReader(Console.OpenStandardInput());
-            StringBuilder sb = new StringBuilder();
-
+            
             string[] input = sr.ReadLine().Split();
             int N = Convert.ToInt32(input[0]);
             int M = Convert.ToInt32(input[1]);
-
-            Jewel[] colors = new Jewel[M];
+            List<int> list = new List<int>();
 
             for (int i = 0; i < Convert.ToInt32(M); i++ )
-            {
-                colors[i] = new Jewel(Convert.ToInt32(sr.ReadLine()));
-            }
+                list.Add(Convert.ToInt32(sr.ReadLine()));
 
+            for (int i = 0; i < N; i++)
+                Divide(list);
 
-            Console.Write(sb);
+            Console.WriteLine(list.Max());
         }
-        class Jewel
+        static void Divide(List<int> list)
         {
-            public List<int> count;
-            public int max;
-            public Jewel(int value)
-            {
-                max = value;
-                count = new List<int>();
-            }
-            public void Divide()
-            {
-                int a,b;
-                a = count[0] / 2;
-                b = count[0] - a;
-                count.RemoveAt(0);
-                count.Add(b);
-                count.Add(a);
-            }
+            int max = list.Max();
+            int[] value = new int[2];
+            value[0] = max / 2;
+            value[1] = max - value[0];
+            list.AddRange(value);
+            list.Remove(max);
         }
     }
 }
