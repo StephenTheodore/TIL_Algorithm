@@ -14,24 +14,36 @@ namespace _2792
             string[] input = sr.ReadLine().Split();
             int N = Convert.ToInt32(input[0]);
             int M = Convert.ToInt32(input[1]);
-            List<int> list = new List<int>();
 
+            List<int> list = new List<int>();
             for (int i = 0; i < Convert.ToInt32(M); i++ )
                 list.Add(Convert.ToInt32(sr.ReadLine()));
 
-            for (int i = 0; i < N; i++)
-                Divide(list);
-
-            Console.WriteLine(list.Max());
+            Console.WriteLine(Divide(list, N));
         }
-        static void Divide(List<int> list)
+        static int Divide(List<int> list, int N)
         {
-            int max = list.Max();
-            int[] value = new int[2];
-            value[0] = max / 2;
-            value[1] = max - value[0];
-            list.AddRange(value);
-            list.Remove(max);
+            var qryResult = from data in list where data == list.Max() select data;
+            int max = -1;
+            int count;
+            while (N > 0)
+            {
+                max = qryResult.ElementAt(0);
+                count = qryResult.Count();
+                if (max == 1)
+                    return 1;
+                if (N <= (list.Count - count) + (count * 2))
+                {
+                    list.RemoveAll(n => n == max);
+                    max = qryResult.ElementAt(0);
+                    break;
+                }
+                for (int i = 0; i < count; i++)
+                    list.AddRange(new int[] { max / 2, max - (max / 2) });
+                list.RemoveAll(n => n == max);
+                N -= count;
+            }
+            return max;
         }
     }
 }
