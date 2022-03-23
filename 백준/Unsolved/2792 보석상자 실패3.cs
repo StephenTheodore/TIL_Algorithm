@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace _2792
 {
@@ -10,40 +8,78 @@ namespace _2792
         static void Main(string[] args)
         {
             StreamReader sr = new StreamReader(Console.OpenStandardInput());
-            
-            string[] input = sr.ReadLine().Split();
-            int N = Convert.ToInt32(input[0]);
-            int M = Convert.ToInt32(input[1]);
+            string[] input = sr.ReadLine().Split(' ');
+            int N = int.Parse(input[0]);
+            int M = int.Parse(input[1]);
 
-            List<int> list = new List<int>();
-            for (int i = 0; i < Convert.ToInt32(M); i++ )
-                list.Add(Convert.ToInt32(sr.ReadLine()));
+            Heap Jewels = new Heap(N + 1);
 
-            Console.WriteLine(Divide(list, N));
+            for (int i = 0; i < M; i++)
+                Jewels.InsertData(int.Parse(sr.ReadLine()));
+
+            if (Jewels.GetRoot() != 1)
+                while (N > M++)
+                    Jewels.DivideData();
+
+            Console.WriteLine(Jewels.GetRoot());
         }
-        static int Divide(List<int> list, int N)
+        class Heap
         {
-            var qryResult = from data in list where data == list.Max() select data;
-            int max = -1;
-            int count;
-            while (N > 0)
+            private int[] datas;
+            private int count;
+            public Heap(long size)
             {
-                max = qryResult.ElementAt(0);
-                count = qryResult.Count();
-                if (max == 1)
-                    return 1;
-                if (N <= (list.Count - count) + (count * 2))
-                {
-                    list.RemoveAll(n => n == max);
-                    max = qryResult.ElementAt(0);
-                    break;
-                }
-                for (int i = 0; i < count; i++)
-                    list.AddRange(new int[] { max / 2, max - (max / 2) });
-                list.RemoveAll(n => n == max);
-                N -= count;
+                count = 0;
+                datas = new int[size];
             }
-            return max;
+            public int GetRoot()
+            {
+                return datas[1];
+            }
+            public void InsertData(int data)
+            {
+                int idx = ++count;
+
+                while (idx != 1 && data > datas[idx / 2])
+                {
+                    datas[idx] = datas[idx / 2];
+                    idx = idx / 2;
+                }
+                datas[idx] = data;
+            }
+            public void DivideData()
+            {
+                int root = datas[1];
+                int parent = 1;
+                int child = 2;
+
+                datas[1] = 0;
+                SwapData(1, count--);
+
+                while(child < count)
+                {
+                    if (datas[child] > datas[child + 1])
+                    {
+                        if (datas[child] < datas[parent])
+                            break;
+                        SwapData(parent, child);
+                    }
+                    else
+                    {
+                        if (datas[child + 1] < datas[parent])
+                            break;
+                        SwapData(parent, ++child);
+                    }
+                    parent = child;
+                    child *= 2;
+                }
+            }
+            private void SwapData(int idx1, int idx2)
+            {
+                int tmp = datas[idx1];
+                datas[idx1] = datas[idx2];
+                datas[idx2] = tmp;
+            }
         }
     }
 }
