@@ -1,9 +1,8 @@
 ## 내 나이 스물여덟 이대로는 안되겠어~~~
-## 오늘만 공부하자.
 [![Solved.ac 프로필](http://mazassumnida.wtf/api/generate_badge?boj=wssmash93)](https://solved.ac/wssmash93)
 
 # TODO : TIL
- ## Algorithm 풀이
+> ## Algorithm 풀이
 > ### 목표
 > - 백준 Gold1 도달하기
 > - 프로그래머스 스킬체크 Level4 도달, Level3 문제들 정복
@@ -17,7 +16,7 @@
 > 6. 이분 탐색
 > 7. 누적합
 
-## TODO : Computer Vision
+> ## TODO : Computer Vision
 > ### 목표
 > - 안면인식 후 얼굴의 점을 매칭하여 검출하는 프로그램 작성 및 실습
 > - 디스플레이 패널의 결점별 특징 학습 후 검출하는 프로그램 작성 및 실습
