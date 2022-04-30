@@ -30,8 +30,9 @@ ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA
 using System;
 using System.Linq;
 
-public class Solution {
- private int answer = 0;
+public class Solution
+{
+    private int answer = 0;
     private int idxRight = 0;
     private int idxLeft = 0;
     private bool[] comp;
@@ -55,7 +56,7 @@ public class Solution {
 
         return answer;
     }
-    private void changeDatas(string s,int idx)
+    private void changeDatas(string s, int idx)
     {
         //다음 인덱스를 찾기위한 정보처리
         comp[idx] = true;
@@ -84,7 +85,7 @@ public class Solution {
             toLeft++;
         }
 
-        if(toRight == toLeft)
+        if (toRight == toLeft)
         {
             //두 방향의 이동거리가 같다면 다음 문자까지 고려한다
             answer += toRight;
