@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
 	int N, M, value;
-	const int Size = 10000000;
+	const int Size = 10000001;
 	vector<int> AP(Size), AN(Size);
 
 	scanf("%d", &N);
