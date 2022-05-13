@@ -3,36 +3,34 @@
 
 using namespace std;
 
-vector<int> ContinueNumber(int N , int start)
+vector<int> ContinueNumber(int N, int cur)
 {
-	int value, idx = 2;
-	vector<int> numbers{ N,start };
+	int val, idx = 2;
+	vector<int> nums{ N,cur };
 	while (true)
 	{
-		value = numbers[idx - 2] - numbers[idx - 1];
-		if (value < 0)
-			return numbers;
-		numbers.push_back(value);
+		val = nums[idx - 2] - nums[idx - 1];
+		if (val < 0)
+			return nums;
+		nums.push_back(val);
 		idx++;
 	}
 }
 int main()
 {
 	int N;
-	vector<int> maxnumbers;
+	vector<int> maxnums;
 	vector<int> ret;
-	int maxamount = 0;
 	scanf("%d", &N);
 
-	for (int i = N/2; i <= N; i++)
+	for (int i = N / 2; i <= N; i++)
 	{
 		ret = ContinueNumber(N, i);
-		maxnumbers = ret.size() > maxnumbers.size() ? ret : maxnumbers;
+		maxnums = ret.size() > maxnums.size() ? ret : maxnums;
 	}
-	printf("%d\n", maxnumbers.size());
-	for (int number : maxnumbers)
-	{
-		printf("%d ", number);
-	}
+
+	printf("%d\n", maxnums.size());
+	for (int num : maxnums)
+		printf("%d ", num);
 	printf("\n");
 }
