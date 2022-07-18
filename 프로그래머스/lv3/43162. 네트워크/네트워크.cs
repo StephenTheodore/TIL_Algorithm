@@ -7,6 +7,7 @@ public class Solution {
         int amountNetworks = 0;
         public int solution(int n, int[,] computers)
         {
+            Stack<int> st;
             List<int> listIndex;
             this.amountComputers = n;
 
