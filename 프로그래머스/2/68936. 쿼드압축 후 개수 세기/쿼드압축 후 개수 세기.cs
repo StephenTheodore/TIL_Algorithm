@@ -9,17 +9,15 @@ public class Solution
         var answer = new int[2];
         var uniqueValues = arr.Cast<int>().Distinct();
         
-        if(uniqueValues.Count() > 1)
+        answer[0] = uniqueValues.Count(val => val == 0);
+        answer[1] = uniqueValues.Count(val => val == 1);
+        
+        if (uniqueValues.Count() > 1)
         {   
             var rootNode = new QuadNode(arr);
         
             answer[0] = rootNode.ContainNumberCount(0);
             answer[1] = rootNode.ContainNumberCount(1);
-        }
-        else
-        {
-            answer[0] = uniqueValues.Count(val => val == 0);
-            answer[1] = uniqueValues.Count(val => val == 1);
         }
         
         return answer;
